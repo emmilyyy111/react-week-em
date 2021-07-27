@@ -12,7 +12,8 @@ const {offices, officials} = props
                  <div className="representative-info">
                     <div className="office-title">{office.name}</div>
                     <p>{official?.name}</p>
-                    <label>Phone:&nbsp;
+                    <label>
+                        <label className="info-title">Phone:</label>&nbsp;
                         <a href={`tel:${official?.phones[0]}`}>
                             {official?.phones[0]}
                         </a>
@@ -20,7 +21,8 @@ const {offices, officials} = props
                     <br/>
                     {official?.address && 
                         <>
-                        <label>Address:&nbsp;
+                        <label>
+                            <label className="info-title">Address:</label>&nbsp;
                             <span>
                             {official?.address[0]?.line1},
                             &nbsp; {official?.address[0]?.city},
@@ -34,7 +36,7 @@ const {offices, officials} = props
                     {official?.emails && 
                         <>
                         <label>
-                            Email:&nbsp;
+                            <label className="info-title">Email:</label>&nbsp;
                             <a href={`mailto: ${official?.emails[0]}`}>
                                 {official?.emails[0]}
                             </a>
