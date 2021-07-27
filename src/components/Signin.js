@@ -1,37 +1,29 @@
-import { useState } from 'react'
-import firebase from 'firebase/app' // import firebase library
-import 'firebase/auth' // import authentication part of library
-import { firebaseConfig } from '../config' // import firebase config (public info)
+import {useState} from 'react'
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import { firebaseConfig } from '../config'
 
-function Signup ({setUser}) {
+
+function SignIn ({ setUser }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [loading, setLoading] = useState(false)
     
-    const signUpUser = (e) => {
+    const signInUser = (e) => {
         e.preventDefault()
-        setLoading(true)
-        console.log('Signing up...')
+        console.log('Signing in...')
         if(!firebase.apps.length){
             firebase.initializeApp(firebaseConfig)
         }
-         
-        firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then(response => {
-            setLoading(false)
-            setUser(response.user)
-        })
-        .catch(err => {
-            alert(err.message)
-            setUser(false)
-        })
-        
+        firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(response => setUser(response.user))
+        .catch(err => alert(err.message))
+
     }
 
     return(
         <div className="signup-container">
-            <h1>Sign Up</h1>
-            <form onSubmit={(e) => signUpUser(e)}>
+            <h1>Sign In</h1>
+            <form onSubmit={(e) => signInUser(e)}>
                 <label className="form-label">
                     Email:&nbsp;
                     <input
@@ -53,16 +45,14 @@ function Signup ({setUser}) {
                     onChange={e => setPassword(e.target.value)}
                     />
                 </label>
-                <br/>
-                
-                    <button className="submit-btn" type="submit"> 
-                    {loading ? 'Loading...' : 'Signing up...'}
-            
+                <button 
+                    className="submit-btn"
+                    type="submit">
+                    SUBMIT
                 </button>
-            
             </form>
         </div>
     )
 }
 
-export default Signup
+export default SignIn

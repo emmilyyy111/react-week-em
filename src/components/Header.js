@@ -5,14 +5,24 @@ function Header (){
     return (
         <div className="header">
             <ul>
-                <li className="menu-item">
+                <li className="menu-item header-title">
                     <Link to="/">
                     Representative Finder
                     </Link>
                 </li>
                 <li className="menu-item">
+                    <Link to="/search">
+                        Search
+                    </Link>
+                </li>
+                <li className="menu-item">
                     <Link to="/Signup">
                         Sign Up
+                    </Link>
+                </li>
+                <li className="menu-item">
+                    <Link to="/Signin">
+                        Sign In
                     </Link>
                 </li>
             </ul>

@@ -2,11 +2,13 @@ import { useState } from "react"
 import { APIKEY } from "../config.js"
 import RepresentativeSearchResults from "./RepresentativeSearchResults.js"
 
-function RepresentativeSearch() {
+function RepresentativeSearch({user}) {
     const [address, setAddress] = useState('')
     const [offices, setOffices] = useState([])
     const [officials, setOfficials] = useState([])
     
+console.log('USER ===>', user)
+
     const searchRepresentatives = () => {
         console.log('searching...')
         // fetch or civic info end point
@@ -27,6 +29,7 @@ function RepresentativeSearch() {
     
     return (
     <div className="search-container">
+        <h1>Search Representative By Address</h1>
         <input
         name="representativesearch"
         type="text"

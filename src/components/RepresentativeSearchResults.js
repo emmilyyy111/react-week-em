@@ -2,13 +2,14 @@ function RepresentativeSearchResults(props){
 
 const {offices, officials} = props
 
-    return(
+    return (
         <div>
             {offices.map(office => {
 
                 const official = officials[office.officialIndices[0]]
                 const address = official?.address && official?.address[0]
-            return(
+                
+            return (
                  <div className="representative-info">
                     <div className="office-title">{office.name}</div>
                     <p>{official?.name}</p>
