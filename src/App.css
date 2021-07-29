@@ -84,6 +84,7 @@ ul{
   font-size: 26px;
   margin-right: 24px;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .signup-container {

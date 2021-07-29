@@ -1,13 +1,26 @@
-
 import {Link} from 'react-router-dom'
+import firebase from 'firebase/app'
+import'firebase/auth'
 
-function Header (){
+function Header ({user, setUser, userProfile, setUserProfile}){
+
+    const logOut = (e) => {
+        e.preventDefault()
+        firebase.auth()
+            .signOut()
+            .then(() => {
+                localStorage.removeItem('user')
+                setUser(undefined)
+                setUserProfile(undefined)
+            })
+            .catch(error => alert(error))
+    }
     return (
         <div className="header">
             <ul>
                 <li className="menu-item header-title">
                     <Link to="/">
-                    Representative Finder
+                        Representative Finder
                     </Link>
                 </li>
                 <li className="menu-item">
@@ -15,16 +28,30 @@ function Header (){
                         Search
                     </Link>
                 </li>
-                <li className="menu-item">
-                    <Link to="/Signup">
-                        Sign Up
-                    </Link>
-                </li>
-                <li className="menu-item">
-                    <Link to="/Signin">
-                        Sign In
-                    </Link>
-                </li>
+                {!user && 
+                    <li className="menu-item">
+                        <Link to="/Signup">
+                            Sign Up
+                        </Link>
+                    </li>}
+                {!user && 
+                    <li className="menu-item">
+                        <Link to="/Signin">
+                            Sign In
+                        </Link>
+                    </li>}
+                {user && 
+                    <li className="menu-item">
+                        <a onClick={(e) => logOut(e)}>
+                            Sign Out
+                        </a>
+                    </li>}
+                {user && userProfile &&
+                    <li className="menu-item">
+                        <Link to="/user-profile">
+                            User Profile
+                        </Link>
+                    </li>}
             </ul>
         </div>
     )
