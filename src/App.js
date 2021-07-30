@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, createContext } from 'react'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import firebase from 'firebase'
 import { firebaseConfig } from './config'
@@ -13,6 +13,8 @@ import './App.css';
 
  if(!firebase.apps.length) // checking if firebase is already initialized if it is then initializes it again
 firebase.initializeApp(firebaseConfig)
+
+export const UserContext = createContext(undefined)
 
 function App() {
 
@@ -44,11 +46,12 @@ function App() {
 
   
   
-
+  // JSX---->
   return (
     <Router> 
       <div>
-        <Header user={user} userProfile={userProfile} setUser={setUser} setUserProfile={setUserProfile}/>
+        <UserContext.Provider value={{userProfile}}>
+          <Header user={user} userProfile={userProfile} setUser={setUser} setUserProfile={setUserProfile}/>
       <div>
       <Switch>
         <Route path="/Signin"> 
@@ -68,8 +71,8 @@ function App() {
           </Route>
       </Switch>
         </div>
-          <Footer />
-          
+            <Footer />
+          </UserContext.Provider>
         </div>
     </Router>
   );
